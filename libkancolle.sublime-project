@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": [
+				"CMakeFiles",
+				"lib"
+			],
+			"file_exclude_patterns": [
+				"CMakeCache.txt", "cmake_install.cmake",
+				"Makefile",
+				"*.sublime-workspace"
+			]
+		}
+	]
+}

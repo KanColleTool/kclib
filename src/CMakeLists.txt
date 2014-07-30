@@ -1,0 +1,8 @@
+if(CMAKE_COMPILER_IS_GNUCXX OR APPLE)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x")
+endif()
+
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
+file(GLOB_RECURSE LIBKC_SOURCES *.cpp ${PROJECT_SOURCE_DIR}/include/*.h)
+add_library(kclib ${LIBKC_SOURCES})
