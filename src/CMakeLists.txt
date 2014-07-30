@@ -6,3 +6,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 file(GLOB_RECURSE LIBKC_SOURCES *.cpp ${PROJECT_SOURCE_DIR}/include/*.h)
 add_library(kclib ${LIBKC_SOURCES})
+
+find_library(LIBZ z)
+target_link_libraries(kclib ${LIBZ})
