@@ -1,4 +1,4 @@
-#include <LKTranslator.h>
+#include <kclib/LKTranslator.h>
 
 LKTranslator::LKTranslator()
 {
