@@ -18,7 +18,12 @@ public:
 	virtual void get(const std::string &url, handler_fn callback);
 	virtual void post(const std::string &url, std::vector<char> body, handler_fn callback);
 	
+	// For testing purposes only!
+	bool synchronous = false;
+	
 protected:
+	void _registerReply(QNetworkReply *reply, handler_fn callback);
+	
 	QMap<QNetworkReply*,handler_fn> handlers;
 	QNetworkAccessManager nm;
 	
