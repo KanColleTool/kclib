@@ -1,12 +1,14 @@
 CMakeCache.txt
 CMakeFiles
 cmake_install.cmake
+CTestTestfile.cmake
 
 *_automoc.cpp
 
 Makefile
 /lib
 /bin
+/Testing
 
 *.sublime-workspace
 
