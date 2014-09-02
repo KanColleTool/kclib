@@ -10,6 +10,7 @@
 			"file_exclude_patterns": [
 				"CMakeCache.txt", "cmake_install.cmake", "CTestTestfile.cmake",
 				"Makefile",
+				"*.moc", "*_automoc.cpp", "moc_*.cpp",
 				"*.sublime-workspace"
 			]
 		}
