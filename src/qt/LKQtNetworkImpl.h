@@ -1,22 +1,20 @@
 #ifndef KCLIB_LKQTNETWORKIMPL_H
 #define KCLIB_LKQTNETWORKIMPL_H
 
-#include "../LKNetworkImpl.h"
+#include "LKNetworkImpl.h"
 #include <QObject>
 #include <QNetworkAccessManager>
 
-class LKQtNetworkImpl : public LKNetworkImpl, public QObject
+class LKQtNetworkImpl : public QObject, public LKNetworkImpl
 {
 	Q_OBJECT
 	
 public:
-	typedef std::function<void(bool success, std::vector<char> body)> handler_fn;
-	
 	LKQtNetworkImpl();
 	virtual ~LKQtNetworkImpl();
 	
-	virtual void get(const std::string &url, handler_fn callback);
-	virtual void post(const std::string &url, std::vector<char> body, handler_fn callback);
+	virtual void get(const std::string &url, handler_fn callback) override;
+	virtual void post(const std::string &url, std::string body, handler_fn callback) override;
 	
 	// For testing purposes only!
 	bool synchronous = false;

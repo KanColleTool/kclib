@@ -4,7 +4,7 @@ endif()
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-file(GLOB KCLIB_SOURCES *.cpp ${PROJECT_SOURCE_DIR}/include/*.h)
+file(GLOB_RECURSE KCLIB_SOURCES *.cpp ${PROJECT_SOURCE_DIR}/include/*.h)
 
 find_package(Qt5Network)
 if(Qt5Network_FOUND)
