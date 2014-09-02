@@ -1,7 +1,7 @@
 #ifndef KCLIB_LKQTNETWORKIMPL_H
 #define KCLIB_LKQTNETWORKIMPL_H
 
-#include "LKNetworkImpl.h"
+#include "../LKNetworkImpl.h"
 #include <QObject>
 #include <QNetworkAccessManager>
 

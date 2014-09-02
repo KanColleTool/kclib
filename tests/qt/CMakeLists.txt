@@ -1,0 +1,15 @@
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt5Network)
+find_package(Qt5Test)
+
+file(GLOB SOURCES *.cpp)
+file(GLOB AUTOMOC_SOURCES *_automoc.cpp)
+list(REMOVE_ITEM SOURCES "${AUTOMOC_SOURCES}")
+foreach(file ${SOURCES})
+	get_filename_component(target ${file} NAME_WE)
+	add_executable(${target} ${file})
+	target_link_libraries(${target} kclib Qt5::Network Qt5::Test)
+	add_test(NAME ${target} COMMAND ${target})
+	add_dependencies(check ${target})
+endforeach()

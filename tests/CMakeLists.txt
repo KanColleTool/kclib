@@ -1,0 +1,20 @@
+if(CMAKE_COMPILER_IS_GNUCXX OR APPLE)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x")
+endif()
+
+include_directories("${PROJECT_SOURCE_DIR}/src")
+include_directories("${PROJECT_SOURCE_DIR}/vendor/catch/include")
+
+find_package(Qt5Network)
+if(Qt5Network_FOUND)
+	add_subdirectory(qt)
+endif()
+
+file(GLOB SOURCES *.cpp)
+foreach(file ${SOURCES})
+	get_filename_component(target ${file} NAME_WE)
+	add_executable(${target} ${file})
+	target_link_libraries(${target} kclib)
+	add_test(NAME ${target} COMMAND ${target})
+	add_dependencies(check ${target})
+endforeach()

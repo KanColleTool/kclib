@@ -1,4 +1,4 @@
-#include <kclib/LKQtNetworkImpl.h>
+#include "LKQtNetworkImpl.h"
 #include <QUrl>
 #include <QNetworkRequest>
 #include <QNetworkReply>

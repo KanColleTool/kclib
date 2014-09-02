@@ -1,4 +1,4 @@
-#include <kclib/LKTranslator.h>
+#include "LKTranslator.h"
 
 LKTranslator::LKTranslator(LKNetworkImpl *netImpl):
 	netImpl(netImpl)

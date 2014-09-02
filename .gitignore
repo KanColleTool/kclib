@@ -4,6 +4,8 @@ cmake_install.cmake
 CTestTestfile.cmake
 
 *_automoc.cpp
+moc_*.cpp
+*.moc
 
 Makefile
 /lib
