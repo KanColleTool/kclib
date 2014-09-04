@@ -29,28 +29,28 @@ private slots:
 	void getExpect200()
 	{
 		impl.get("http://httpbin.org/status/200", handler);
-		QVERIFY(success == true);
-		QVERIFY(status == 200);
+		QCOMPARE(success, true);
+		QCOMPARE(status, 200);
 	};
 	
 	void getExpect404()
 	{
 		impl.get("http://httpbin.org/status/404", handler);
-		QVERIFY(success == true);
-		QVERIFY(status == 404);
+		QCOMPARE(success, true);
+		QCOMPARE(status, 404);
 	};
 	
 	void postExpect200()
 	{
 		impl.post("http://httpbin.org/status/200", "Lorem ipsum dolor sit amet", handler);
-		QVERIFY(success == true);
-		QVERIFY(status == 200);
+		QCOMPARE(success, true);
+		QCOMPARE(status, 200);
 	};
 	
 	void postExpect404()
 	{
 		impl.post("http://httpbin.org/status/404", "Lorem ipsum dolor sit amet", handler);
-		QVERIFY(success == true);
-		QVERIFY(status == 404);
+		QCOMPARE(success, true);
+		QCOMPARE(status, 404);
 	};
 };

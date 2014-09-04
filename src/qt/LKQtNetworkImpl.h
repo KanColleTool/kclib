@@ -10,9 +10,6 @@ class LKQtNetworkImpl : public QObject, public LKNetworkImpl
 	Q_OBJECT
 	
 public:
-	LKQtNetworkImpl();
-	virtual ~LKQtNetworkImpl();
-	
 	virtual void get(const std::string &url, handler_fn callback) override;
 	virtual void post(const std::string &url, std::string body, handler_fn callback) override;
 	
@@ -26,7 +23,7 @@ protected:
 	QNetworkAccessManager nm;
 	
 protected slots:
-	void onRequestFinished(QNetworkReply *reply);
+	void onRequestFinished();
 };
 
 #endif
