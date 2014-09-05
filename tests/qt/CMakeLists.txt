@@ -4,7 +4,7 @@ find_package(Qt5Network)
 find_package(Qt5Test)
 
 file(GLOB SOURCES *.cpp)
-file(GLOB AUTOMOC_SOURCES *_automoc.cpp)
+file(GLOB AUTOMOC_SOURCES *_automoc.cpp moc_*.cpp)
 list(REMOVE_ITEM SOURCES "${AUTOMOC_SOURCES}")
 foreach(file ${SOURCES})
 	get_filename_component(target ${file} NAME_WE)
