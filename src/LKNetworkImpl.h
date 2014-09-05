@@ -1,11 +1,13 @@
 #ifndef KCLIB_LKNETWORKIMPL_H
 #define KCLIB_LKNETWORKIMPL_H
 
+#include "LKPlatformInterface.h"
+
 #include <string>
 #include <vector>
 #include <functional>
 
-class LKNetworkImpl
+class LKNetworkImpl : public LKPlatformInterface<LKNetworkImpl>
 {
 public:
 	typedef std::function<void(bool success, int status, std::vector<char> body)> handler_fn;

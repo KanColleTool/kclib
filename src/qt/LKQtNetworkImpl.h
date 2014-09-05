@@ -26,4 +26,6 @@ protected slots:
 	void onRequestFinished();
 };
 
+REGISTER_IMPL(LKNetworkImpl, LKQtNetworkImpl, 0)
+
 #endif
