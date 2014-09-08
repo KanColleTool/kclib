@@ -6,6 +6,9 @@ class TestQtNetworkImpl : public QObject
 	Q_OBJECT
 	
 public:
+	TestQtNetworkImpl() {}
+	virtual ~TestQtNetworkImpl() {};
+
 	LKQtNetworkImpl impl;
 	
 	bool success = true;

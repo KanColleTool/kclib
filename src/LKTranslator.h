@@ -13,9 +13,9 @@ public:
 	
 	/**
 	 * Requests the translation from the server.
-	 * @param lang The language to fetch the translation for
+	 * @param lang The language to fetch the translation for; ex. "en"
 	 */
-	void requestTranslation(std::string lang = "en", std::function<void()> callback);
+	void requestTranslation(std::string lang, std::function<void()> callback = nullptr);
 	
 protected:
 	/**
