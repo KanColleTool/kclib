@@ -5,6 +5,3 @@ endif()
 file(GLOB KCLIB_SOURCES *.cpp *.h)
 
 add_library(kclib ${KCLIB_SOURCES})
-
-find_library(LIBZ z)
-target_link_libraries(kclib ${LIBZ})
