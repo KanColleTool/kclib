@@ -1,5 +1,5 @@
 set(CMAKE_AUTOMOC ON)
-file(GLOB kclib_QT_SOURCES *.cpp)
+file(GLOB kclib_QT_SOURCES *.cpp *.h)
 file(GLOB kclib_QT_SOURCES_JUNK moc_*.cpp *_automoc.cpp)
 list(REMOVE_ITEM kclib_QT_SOURCES "${kclib_QT_SOURCES_JUNK}")
 

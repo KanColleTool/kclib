@@ -2,6 +2,7 @@
 #define KCLIB_LKNETWORKINTERFACE_H
 
 #include <map>
+#include <iostream>
 
 template<typename T>
 class LKPlatformInterface
@@ -18,6 +19,7 @@ public:
 		{
 			register_t(int priority)
 			{
+				std::cout << "Registering a module with Prio " << priority << std::endl;
 				LKPlatformInterface<T>::Registry::get().all.insert(std::make_pair(priority, &register_t<T2>::create));
 			};
 			
@@ -50,7 +52,8 @@ public:
 	static T* create()
 	{
 		// Call the createfn of the impl with the highest priority
-		return LKPlatformInterface<T>::Registry::get().all.rbegin()->second();
+		auto& impls = LKPlatformInterface<T>::Registry::get().all;
+		return impls.rbegin()->second();
 	};
 
 protected:
