@@ -5,11 +5,6 @@ endif()
 include_directories("${PROJECT_SOURCE_DIR}/src")
 include_directories("${PROJECT_SOURCE_DIR}/vendor/catch/include")
 
-find_package(Qt5Network)
-if(Qt5Network_FOUND)
-	add_subdirectory(qt)
-endif()
-
 file(GLOB SOURCES *.cpp)
 foreach(file ${SOURCES})
 	get_filename_component(target ${file} NAME_WE)
