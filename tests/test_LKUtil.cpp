@@ -3,7 +3,7 @@
 #include <iostream>
 #include <LKUtil.h>
 
-TEST_CASE("unescape()")
+TEST_CASE("unescape()/escape()")
 {
 	std::string naka = "\u90a3\u73c2";
 	std::string nakaEscaped = "\\u90a3\\u73c2";
