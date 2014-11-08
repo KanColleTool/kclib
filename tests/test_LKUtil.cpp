@@ -37,7 +37,8 @@ TEST_CASE("unescape()/escape()")
 
 TEST_CASE("isNumeric()")
 {
-	REQUIRE(isNumeric("") == false);
-	REQUIRE(isNumeric("qwertyuiop") == false);
-	REQUIRE(isNumeric("1234567890") == true);
+	REQUIRE_FALSE(isNumeric(""));
+	REQUIRE_FALSE(isNumeric("qwertyuiop"));
+	
+	REQUIRE(isNumeric("1234567890"));
 }
