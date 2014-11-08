@@ -18,3 +18,19 @@ TEST_CASE("Can unescape a sentence with Naka-chan's name")
 	
 	REQUIRE(s1 == s2);
 }
+
+TEST_CASE("Can escape Naka-chan's name")
+{
+	std::string s1("\\u90a3\\u73c2");
+	std::string s2 = escape("\u90a3\u73c2");
+	
+	REQUIRE(s1 == s2);
+}
+
+TEST_CASE("Can escape a sentence with Naka-chan's name")
+{
+	std::string s1("...\\u90a3\\u73c2-chan dayo~");
+	std::string s2 = escape("...\u90a3\u73c2-chan dayo~");
+	
+	REQUIRE(s1 == s2);
+}

@@ -12,4 +12,12 @@
  */
 std::string unescape(std::string string);
 
+/**
+ * Escapes an Unicode string.
+ * 
+ * This is basically the reverse of unescape(), and will turn a string like
+ * "那珂" back into "\u90A3\u73C2".
+ */
+std::string escape(std::string string);
+
 #endif

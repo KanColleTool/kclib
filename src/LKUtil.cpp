@@ -2,6 +2,7 @@
 #include <regex>
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 #include <locale>
 #include <codecvt>
 
@@ -36,4 +37,23 @@ std::string unescape(std::string str)
 	}
 	
 	return retval;
+}
+
+std::string escape(std::string str)
+{
+	std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> convert;
+	std::u32string s32 = convert.from_bytes(str);
+	
+	std::stringstream ss;
+	ss << std::hex;
+	for(auto it = s32.begin(); it != s32.end(); it++)
+	{
+		char32_t &c = *it;
+		if(c <= 255)
+			ss << static_cast<char>(c);
+		else
+			ss << "\\u" << c;
+	}
+	
+	return ss.str();
 }
