@@ -2,6 +2,7 @@
 #define KCLIB_LKUTIL_H
 
 #include <string>
+#include "crc32.h"
 
 /**
  * Unescapes an Unicode-escaped string.
