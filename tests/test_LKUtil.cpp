@@ -34,3 +34,10 @@ TEST_CASE("unescape()")
 		REQUIRE(escape(sentence) == sentenceEscaped);
 	}
 }
+
+TEST_CASE("isNumeric()")
+{
+	REQUIRE(isNumeric("") == false);
+	REQUIRE(isNumeric("qwertyuiop") == false);
+	REQUIRE(isNumeric("1234567890") == true);
+}

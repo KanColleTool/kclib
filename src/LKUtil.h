@@ -21,4 +21,11 @@ std::string unescape(std::string string);
  */
 std::string escape(std::string string);
 
+/**
+ * Is this string numeric?
+ * 
+ * That is, does it contain nothing but digits (0-9)?
+ */
+bool isNumeric(std::string string);
+
 #endif

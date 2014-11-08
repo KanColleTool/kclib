@@ -63,3 +63,17 @@ std::string escape(std::string str)
 	
 	return ss.str();
 }
+
+bool isNumeric(std::string str)
+{
+	// Empty strings are definitely not numeric
+	if(str.size() == 0)
+		return false;
+	
+	// If the string contains anything not a digit or blank, it's not numeric
+	for(auto it = str.begin(); it != str.end(); it++)
+		if(!std::isblank(*it) && !std::isdigit(*it))
+			return false;
+	
+	return true;
+}
