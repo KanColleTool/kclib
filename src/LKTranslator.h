@@ -45,7 +45,7 @@ public:
 	 * This should be set externally by your program, as kclib has no
 	 * networking facilities of its own.
 	 */
-	LoadStatus loadStatus;
+	LoadStatus loadStatus = LoadStatusNotLoaded;
 	
 	/**
 	 * Current translation data.
