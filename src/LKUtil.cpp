@@ -41,9 +41,15 @@ std::string unescape(std::string str)
 
 std::string escape(std::string str)
 {
+	// Convert the unescaped string into a u32string, so that we can treat it
+	// as an UTF-32 array, and loop over one of any character at a time - as
+	// opposed to one _char_ at a time, as with std::string; one char is not a
+	// meaningful representation of anything outside of ASCII.
 	std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> convert;
 	std::u32string s32 = convert.from_bytes(str);
 	
+	// Use a hex-mode std::stringstream for free formatting of anything outside
+	// of the ASCII range (character codes 0-255); just remember the \u prefix
 	std::stringstream ss;
 	ss << std::hex;
 	for(auto it = s32.begin(); it != s32.end(); it++)
