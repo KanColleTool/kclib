@@ -22,8 +22,9 @@ std::string unescape(std::string str)
 	// Loop through all the matches
 	for(std::sregex_iterator it = begin; it != end; it++)
 	{
-		// Convert the match into a char32_t, and go from there to a u32string
-		// Thank you, C++11, these things - it'd be incredibly painful in C++03
+		// Convert the match into a char32_t (UTF-32 characters), and go from
+		// there to a u32string. Thank you, C++11, for these - this would be
+		// incredibly painful in C++03
 		const std::smatch &match = *it;
 		char32_t ch = stoi(match.str().substr(2), nullptr, 16);
 		std::u32string s32(&ch, 1);
