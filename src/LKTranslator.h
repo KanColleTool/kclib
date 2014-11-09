@@ -61,6 +61,14 @@ public:
 	 * Callback for reporting untranslated lines.
 	 */
 	std::function<void(std::string line, std::string lastPathComponent, std::string key)> reportCallback;
+	
+protected:
+	/**
+	 * Handles untranslated lines.
+	 * 
+	 * If the stars align, this line will actually reach the report callback.
+	 */
+	void handleUntranslatedLine(std::string line, std::string lastPathComponent, std::string jsonKey);
 };
 
 #endif

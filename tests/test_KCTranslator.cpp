@@ -21,10 +21,35 @@ TEST_CASE("Translation")
 	SECTION("Can translate Naka's name")
 	{
 		REQUIRE(tl.translate("\u90a3\u73c2") == "Naka");
-	}
-	
-	SECTION("Can translate Naka's name, when escaped")
-	{
 		REQUIRE(tl.translate("\\u90a3\\u73c2") == "Naka");
+	}
+}
+
+TEST_CASE("Reporting")
+{
+	LKTranslator tl;
+	
+	int reportCallbackHits = 0;
+	tl.reportCallback = [&](std::string line, std::string lastPathComponent, std::string key) {
+		++reportCallbackHits;
+	};
+	
+	SECTION("Report callback fires, and only when loaded")
+	{
+		tl.loadStatus = LKTranslator::LoadStatusNotLoaded;
+		tl.translate("Definitely no translation", "test", "test");
+		REQUIRE(reportCallbackHits == 0);
+		
+		tl.loadStatus = LKTranslator::LoadStatusLoading;
+		tl.translate("Definitely no translation", "test", "test");
+		REQUIRE(reportCallbackHits == 0);
+		
+		tl.loadStatus = LKTranslator::LoadStatusError;
+		tl.translate("Definitely no translation", "test", "test");
+		REQUIRE(reportCallbackHits == 0);
+		
+		tl.loadStatus = LKTranslator::LoadStatusLoaded;
+		tl.translate("Definitely no translation", "test", "test");
+		REQUIRE(reportCallbackHits == 1);
 	}
 }
