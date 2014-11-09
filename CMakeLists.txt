@@ -18,6 +18,7 @@ if(${CMAKE_GENERATOR} MATCHES ".* Makefiles")
 	endif()
 endif()
 
+add_subdirectory(vendor)
 add_subdirectory(src)
 enable_testing()
 add_subdirectory(tests)
