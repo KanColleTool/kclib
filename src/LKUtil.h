@@ -28,6 +28,13 @@ std::string escape(std::string string);
 bool isNumeric(std::string string);
 
 /**
+ * Is this string blank?
+ * 
+ * That is, is it zero-length or contain nothing but whitespace?
+ */
+bool isBlank(std::string string);
+
+/**
  * Calculates a crc32 checksum of the given string.
  */
 uint32_t crc32(std::string str);

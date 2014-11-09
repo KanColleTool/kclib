@@ -79,6 +79,16 @@ bool isNumeric(std::string str)
 	return true;
 }
 
+bool isBlank(std::string str)
+{
+	// If the string contains anything but blank characters, it's not blank
+	for(auto it = str.begin(); it != str.end(); it++)
+		if(!std::isblank(*it))
+			return false;
+	
+	return true;
+}
+
 uint32_t crc32(std::string str)
 {
 	const char *cstr = str.c_str();
