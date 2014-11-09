@@ -1,3 +1,6 @@
 [submodule "vendor/catch"]
 	path = vendor/catch
 	url = https://github.com/philsquared/Catch.git
+[submodule "vendor/yajl"]
+	path = vendor/yajl
+	url = https://github.com/lloyd/yajl.git
