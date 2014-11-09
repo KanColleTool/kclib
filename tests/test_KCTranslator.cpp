@@ -3,13 +3,11 @@
 #include <LKUtil.h>
 #include <LKTranslator.h>
 
-TEST_CASE("translate()")
+TEST_CASE("Translation")
 {
 	LKTranslator tl;
 	tl.loadStatus = LKTranslator::LoadStatusLoaded;
-	
-	const char *nakasName = "\u90a3\u73c2";
-	tl.translationData[crc32(0, nakasName, strlen(nakasName))] = "Naka";
+	tl.translationData[crc32("\u90a3\u73c2")] = "Naka";
 	
 	SECTION("Unknown lines are left alone")
 	{

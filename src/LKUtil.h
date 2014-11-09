@@ -2,7 +2,6 @@
 #define KCLIB_LKUTIL_H
 
 #include <string>
-#include "crc32.h"
 
 /**
  * Unescapes an Unicode-escaped string.
@@ -27,5 +26,10 @@ std::string escape(std::string string);
  * That is, does it contain nothing but digits (0-9)?
  */
 bool isNumeric(std::string string);
+
+/**
+ * Calculates a crc32 checksum of the given string.
+ */
+uint32_t crc32(std::string str);
 
 #endif

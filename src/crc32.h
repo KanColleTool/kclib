@@ -71,7 +71,7 @@ static const uint32_t crc32_tab[] = {
 /**
  * Computes a crc32 sum from a buffer.
  */
-inline uint32_t crc32(uint32_t crc, const void *buf, size_t size)
+inline uint32_t _crc32(uint32_t crc, const void *buf, size_t size)
 {
 	const uint8_t *p = (uint8_t *)buf;
 	crc = crc ^ ~0U;

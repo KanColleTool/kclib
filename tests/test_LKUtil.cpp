@@ -42,3 +42,8 @@ TEST_CASE("isNumeric()")
 	
 	REQUIRE(isNumeric("1234567890"));
 }
+
+TEST_CASE("crc32()")
+{
+	REQUIRE(crc32("\u90a3\u73c2") == 124853853);
+}

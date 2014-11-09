@@ -5,6 +5,7 @@
 #include <sstream>
 #include <locale>
 #include <codecvt>
+#include "crc32.h"
 
 std::string unescape(std::string str)
 {
@@ -76,4 +77,10 @@ bool isNumeric(std::string str)
 			return false;
 	
 	return true;
+}
+
+uint32_t crc32(std::string str)
+{
+	const char *cstr = str.c_str();
+	return _crc32(0, cstr, strlen(cstr));
 }
