@@ -25,4 +25,19 @@ TEST_CASE("Translation")
 		REQUIRE(LKStreamTranslator(tl).process("") == "");
 		REQUIRE_THROWS(LKStreamTranslator(tl).process("{\"dsfgg\": b}"));
 	}
+	
+	SECTION("Chunks")
+	{
+		LKStreamTranslator stl(tl);
+		std::string output = "";
+		
+		output += stl.process("{\"");
+		output += stl.process("te");
+		output += stl.process("");
+		output += stl.process("st\":\"\\");
+		output += stl.process("u90a3\\u73c2\"");
+		output += stl.process("}");
+		
+		REQUIRE(output == "{\"test\":\"Naka\"}");
+	}
 }
