@@ -12,13 +12,11 @@ TEST_CASE("Translation")
 	
 	SECTION("Normal JSON")
 	{
-		LKStreamTranslator stl(tl);
-		REQUIRE(stl.process("{\"test\":\"\\u90a3\\u73c2\"}") == "{\"test\":\"Naka\"}");
+		REQUIRE(LKStreamTranslator(tl).process("{\"test\":\"\\u90a3\\u73c2\"}") == "{\"test\":\"Naka\"}");
 	}
 	
 	SECTION("With svdata=")
 	{
-		LKStreamTranslator stl(tl);
-		REQUIRE(stl.process("svdata={\"test\":\"\\u90a3\\u73c2\"}") == "svdata={\"test\":\"Naka\"}");
+		REQUIRE(LKStreamTranslator(tl).process("svdata={\"test\":\"\\u90a3\\u73c2\"}") == "svdata={\"test\":\"Naka\"}");
 	}
 }
