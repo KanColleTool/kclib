@@ -16,6 +16,18 @@ if(${CMAKE_GENERATOR} MATCHES ".* Makefiles")
 		add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} 
 			--force-new-ctest-process --output-on-failure)
 	endif()
+	
+	# Automatically build documentation, if Doxygen is installed
+	find_package(Doxygen)
+	if(DOXYGEN_FOUND)
+		add_custom_target(docs ALL
+			${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Doxyfile > /dev/null
+			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+			VERBATIM
+		)
+	else()
+		warning("Doxygen wasn't found; can't build documentation (or warn about undocumented code)")
+	endif()
 endif()
 
 add_subdirectory(vendor)
