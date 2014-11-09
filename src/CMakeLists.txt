@@ -7,3 +7,4 @@ include("${PROJECT_SOURCE_DIR}/vendor/includes.cmake")
 file(GLOB KCLIB_SOURCES *.cpp *.h)
 
 add_library(kclib ${KCLIB_SOURCES})
+target_link_libraries(kclib yajl)
