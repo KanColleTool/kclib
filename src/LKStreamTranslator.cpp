@@ -1,6 +1,6 @@
 #include "LKStreamTranslator.h"
 #include <exception>
-#include <iostream>
+#include <algorithm>
 
 LKStreamTranslator::LKStreamTranslator(LKTranslator &translator, std::string lastPathComponent):
 	ctx { translator, nullptr, nullptr, lastPathComponent }
@@ -35,18 +35,26 @@ std::vector<char> LKStreamTranslator::process(const std::vector<char> &chunk)
 	const char *str = chunk.data();
 	size_t len = chunk.size();
 	
+	// Abort if the string is empty anyways
+	if(len == 0)
+		return retval;
+	
 	// Skip any BOM if there is one
 	const unsigned char bom[] = {0xEF, 0xBB, 0xBF};
-	if(memcmp(bom, str, 3) == 0)
+	if(len >= 3 && memcmp(bom, str, 3) == 0)
 	{
 		str += 3;
 		len -= 3;
 	}
 	
+	// Abort if it had nothing but a BOM
+	if(len == 0)
+		return retval;
+	
 	// KanColle specific: most datablobs are prefixed with "svdata=", that's
 	// needed for the game to work, but we can't parse with it left in
 	const char *svdata = "svdata=";
-	if(memcmp(svdata, str, strlen(svdata)) == 0)
+	if(memcmp(svdata, str, (size_t)std::min(strlen(svdata), len)) == 0)
 	{
 		str += strlen(svdata);
 		len -= strlen(svdata);

@@ -19,4 +19,10 @@ TEST_CASE("Translation")
 	{
 		REQUIRE(LKStreamTranslator(tl).process("svdata={\"test\":\"\\u90a3\\u73c2\"}") == "svdata={\"test\":\"Naka\"}");
 	}
+	
+	SECTION("Empty/invalid strings")
+	{
+		REQUIRE(LKStreamTranslator(tl).process("") == "");
+		REQUIRE_THROWS(LKStreamTranslator(tl).process("{\"dsfgg\": b}"));
+	}
 }
