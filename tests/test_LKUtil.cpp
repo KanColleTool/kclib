@@ -14,23 +14,15 @@ TEST_CASE("unescape()/escape()")
 	std::string sentence = sentencePrefix + naka + sentenceSuffix;
 	std::string sentenceEscaped = sentencePrefix + nakaEscaped + sentenceSuffix;
 	
-	SECTION("Can unescape Naka-chan's name")
+	SECTION("Can unescape things")
 	{
 		REQUIRE(unescape(nakaEscaped) == naka);
-	}
-	
-	SECTION("Can escape Naka-chan's name")
-	{
-		REQUIRE(escape(naka) == nakaEscaped);
-	}
-	
-	SECTION("Can unescape a sentence with Naka-chan's name in it")
-	{
 		REQUIRE(unescape(sentenceEscaped) == sentence);
 	}
 	
-	SECTION("Can escape a sentence with Naka's name in it")
+	SECTION("Can escape things")
 	{
+		REQUIRE(escape(naka) == nakaEscaped);
 		REQUIRE(escape(sentence) == sentenceEscaped);
 	}
 }
