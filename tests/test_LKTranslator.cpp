@@ -28,6 +28,8 @@ TEST_CASE("Translation")
 TEST_CASE("Reporting")
 {
 	LKTranslator tl;
+	tl.loadStatus = LKTranslator::LoadStatusLoaded;
+	tl.blacklistLoadStatus = LKTranslator::LoadStatusLoaded;
 	
 	int reportCallbackHits = 0;
 	tl.reportCallback = [&](std::string line, std::string lastPathComponent, std::string key) {
@@ -51,5 +53,51 @@ TEST_CASE("Reporting")
 		tl.loadStatus = LKTranslator::LoadStatusLoaded;
 		tl.translate("Definitely no translation", "test", "test");
 		REQUIRE(reportCallbackHits == 1);
+	}
+}
+
+TEST_CASE("Blacklisting")
+{
+	LKTranslator tl;
+	tl.loadStatus = LKTranslator::LoadStatusLoaded;
+	tl.blacklist["test"] = { "blacklisted" };
+	tl.blacklist["wcblacklisted"] = { "*" };
+	tl.blacklist["*"] = { "wcblacklisted" };
+	
+	int reportCallbackHits = 0;
+	tl.reportCallback = [&](std::string line, std::string lastPathComponent, std::string key) {
+		++reportCallbackHits;
+	};
+	
+	SECTION("Report callback does not fire without a blacklist loaded")
+	{
+		for(int i = LKTranslator::LoadStatusNotLoaded; i < (int)LKTranslator::LoadStatusError; i++)
+		{
+			reportCallbackHits = 0;
+			tl.blacklistLoadStatus = (LKTranslator::LoadStatus)LKTranslator::LoadStatusNotLoaded;
+			tl.translate("Definitely no translation", "test", "test");
+			REQUIRE(reportCallbackHits == (tl.blacklistLoadStatus == LKTranslator::LoadStatusLoaded ? 1 : 0));
+		}
+	}
+	
+	SECTION("Blacklisting works properly")
+	{
+		tl.blacklistLoadStatus = LKTranslator::LoadStatusLoaded;
+		
+		reportCallbackHits = 0;
+		tl.translate("Definitely no translation", "test", "test");
+		REQUIRE(reportCallbackHits == 1);
+		
+		reportCallbackHits = 0;
+		tl.translate("Definitely no translation", "test", "blacklisted");
+		REQUIRE(reportCallbackHits == 0);
+		
+		reportCallbackHits = 0;
+		tl.translate("Definitely no translation", "wcblacklisted", "qwerty");
+		REQUIRE(reportCallbackHits == 0);
+		
+		reportCallbackHits = 0;
+		tl.translate("Definitely no translation", "qwerty", "wcblacklisted");
+		REQUIRE(reportCallbackHits == 0);
 	}
 }

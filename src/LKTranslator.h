@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <map>
+#include <set>
 #include <string>
 
 /**
@@ -56,6 +57,25 @@ public:
 	 * networking facilities of its own.
 	 */
 	std::map<uint32_t, std::string> translationData;
+	
+	/**
+	 * Current load status for the blacklist.
+	 * 
+	 * @see loadStatus
+	 */
+	LoadStatus blacklistLoadStatus = LoadStatusNotLoaded;
+	
+	/**
+	 * Current submission blacklist.
+	 * 
+	 * Keys are final path components, values are JSON keys. Lines that match
+	 * are considered untranslatable, and will not be submitted to the server.
+	 * 
+	 * Either key or value may be "*"; matching either any path component, or
+	 * any JSON key. "*": "*" is disallowed though, it'd completely break
+	 * submission
+	 */
+	std::map<std::string, std::set<std::string>> blacklist;
 	
 	/**
 	 * Callback for reporting untranslated lines.

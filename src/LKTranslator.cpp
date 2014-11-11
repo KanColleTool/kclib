@@ -26,6 +26,24 @@ void LKTranslator::handleUntranslatedLine(std::string line, std::string lastPath
 	if(lastPathComponent.size() == 0 || jsonKey.size() == 0)
 		return;
 	
+	// We're not reporting anything until we have a blacklist to check against
+	// (TODO: Backlog of lines that were rejected because of this)
+	if(blacklistLoadStatus != LoadStatusLoaded)
+		return;
+	
+	// Check the blacklist
+	auto pathBlacklistIt = blacklist.find(lastPathComponent);
+	auto wildcardBlacklistIt = blacklist.find("*");
+	if(pathBlacklistIt != blacklist.end())
+	{
+		if(pathBlacklistIt->second.count("*") > 0)
+			return; // Path blacklist rejects everything
+		if(pathBlacklistIt->second.count(jsonKey) > 0)
+			return; // Rejected by path blacklist
+	}
+	if(wildcardBlacklistIt != blacklist.end() && wildcardBlacklistIt->second.count(jsonKey) > 0)
+		return; // Key is rejected globally
+	
 	if(loadStatus == LoadStatusLoaded && reportCallback)
 		reportCallback(line, lastPathComponent, jsonKey);
 }
