@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <map>
+#include <deque>
 #include <set>
 #include <string>
 
@@ -89,6 +90,21 @@ protected:
 	 * If the stars align, this line will actually reach the report callback.
 	 */
 	void handleUntranslatedLine(std::string line, std::string lastPathComponent, std::string jsonKey);
+	
+	/**
+	 * An entry for the report backlog.
+	 */
+	struct BacklogEntry {
+		std::string line, lastPathComponent, jsonKey;
+	};
+	
+	/**
+	 * The report backlog.
+	 * 
+	 * When lines are received before we have a report blacklist, we store them
+	 * here until it arrives, then go through it.
+	 */
+	std::deque<BacklogEntry> backlog;
 };
 
 #endif

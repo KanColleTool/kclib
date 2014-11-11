@@ -27,9 +27,23 @@ void LKTranslator::handleUntranslatedLine(std::string line, std::string lastPath
 		return;
 	
 	// We're not reporting anything until we have a blacklist to check against
-	// (TODO: Backlog of lines that were rejected because of this)
 	if(blacklistLoadStatus != LoadStatusLoaded)
+	{
+		backlog.push_back({line, lastPathComponent, jsonKey});
 		return;
+	}
+	
+	// Go through the backlog upon receiving the blacklist, if there is one
+	if(backlog.size() > 0)
+	{
+		// Clear it first, to prevent an infinite loop
+		std::deque<BacklogEntry> backlog_copy = backlog;
+		backlog.clear();
+		
+		// Re-handle every line in it
+		for(BacklogEntry &entry : backlog_copy)
+			this->handleUntranslatedLine(entry.line, entry.lastPathComponent, entry.jsonKey);
+	}
 	
 	// Check the blacklist
 	auto pathBlacklistIt = blacklist.find(lastPathComponent);

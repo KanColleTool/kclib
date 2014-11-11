@@ -101,3 +101,24 @@ TEST_CASE("Blacklisting")
 		REQUIRE(reportCallbackHits == 0);
 	}
 }
+
+TEST_CASE("Backlog")
+{
+	LKTranslator tl;
+	tl.loadStatus = LKTranslator::LoadStatusLoaded;
+	
+	int reportCallbackHits = 0;
+	tl.reportCallback = [&](std::string line, std::string lastPathComponent, std::string key) {
+		++reportCallbackHits;
+	};
+	
+	tl.translate("Line 1", "test", "test");
+	tl.translate("Line 2", "test", "test");
+	tl.translate("Line 3", "test", "test");
+	REQUIRE(reportCallbackHits == 0);
+	
+	tl.blacklistLoadStatus = LKTranslator::LoadStatusLoaded;
+	
+	tl.translate("Final line", "test", "test");
+	REQUIRE(reportCallbackHits == 4);
+}
