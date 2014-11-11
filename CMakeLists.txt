@@ -5,7 +5,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib")
 
-if(${CMAKE_GENERATOR} MATCHES ".* Makefiles")
+if(${CMAKE_GENERATOR} MATCHES ".* Makefiles" AND "${PROJECT_SOURCE_DIR}" EQUAL "${CMAKE_SOURCE_DIR}")
 	# Add a custom 'make check' target to get output when a test fails
 	# Taken from http://stackoverflow.com/questions/16158091/
 	if(CMAKE_CONFIGURATION_TYPES)
